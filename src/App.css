@@ -1,38 +1,280 @@
-.App {
-  text-align: center;
+/* Overall Layout with CSS Grid */
+.container {
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 2fr;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Flexbox for Flexibility within Grid Items */
+.grid-item {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+}
+
+/* Horizontal Navigation Links */
+.grid-item .nav-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.grid-item .nav-list li {
+  margin-right: 100px; /* Adjust spacing between links as needed */
+}
+
+.grid-item .nav-list a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.grid-item .nav-list img {
+  height: 40px;
+  margin-right: 80px; /* Adjust spacing between image and links as needed */
+  margin-left: 40px;
+  align-self: center; /* Center the image vertically with respect to the line height of the text */
+}
+
+@media (max-width: 768px) {
+  .grid-item .nav-list {
+    flex-direction: row; /* Keep links horizontal on smaller screens */
+    align-items: center;
+  }
+
+  .grid-item .nav-list li {
+    margin-right: 40px; /* Adjust spacing between links as needed */
+  }
+
+  .grid-item .nav-list img {
+    margin-right: 40px; /* Adjust spacing between image and links as needed */
+  }
+}
+
+/* Main.js */
+
+/* Styles for Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #495e57;
+  padding: 20px;
+}
+
+.hero-section div {
+  color: #f4ce14;
+  max-width: 60%;
+}
+
+.hero-section h1 {
+  font-size: 7em;
+}
+
+.hero-section p {
   color: white;
+  font-size: 5em;
 }
 
-.App-link {
-  color: #61dafb;
+.hero-section img {
+  max-width: 40%;
+  height: auto;
+  border-radius: 26px; /* Optional: Add a border radius to the image */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero-section button.reserve-button {
+  background-color: #F4CE14;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hero-section button.reserve-button:hover {
+  background-color: #E0B60A; /* Change the color on hover if desired */
+}
+/* Menu Specials Section */
+.menu-specials-section {
+  background-color: #ffffff; /* White background for the entire section */
+  padding: 20px; /* Add padding for better spacing */
+}
+
+/* Menu Specials Container */
+.menu-specials {
+  display: flex;
+  justify-content: space-between; /* Align menu specials horizontally with space between them */
+}
+
+/* Individual Menu Special Card */
+.menu-special {
+  background-color: #EDEFEE; /* Light blue background for each card */
+  padding: 20px; /* Add padding for better spacing inside the card */
+  border-radius: 8px; /* Rounded corners for the card */
+  width: 30%; /* Adjust the width as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+}
+
+/* Menu Special Image */
+.menu-special img {
+  width: 100%; /* Make sure the image fills the entire width of the card */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-bottom: 10px; /* Add some space between the image and the text */
+}
+
+/* Menu Special Title */
+.menu-special h3 {
+  color: #333333; /* Dark text color for the title */
+  font-size: 1.5em; /* Adjust the font size as needed */
+  margin-bottom: 10px; /* Add some space between the title and the description */
+}
+
+/* Menu Special Description */
+.menu-special p {
+  color: #666666; /* Slightly darker text color for the description */
+  font-size: 1em; /* Adjust the font size as needed */
+  line-height: 1.4; /* Adjust line height for better readability */
+  margin: 0; /* Remove default margin to prevent extra spacing */
+}
+/* Testimonials Section */
+.testimonials-section {
+  background-color: #495E57; /* Dark blue background for the entire section */
+  padding: 50px; /* Add padding for better spacing */
+}
+
+/* Testimonials Title */
+.testimonials-section h2 {
+  color: #F4CE14; /* Yellow text color for the testimonials title */
+  font-size: 2em; /* Adjust the font size as needed */
+  text-align: center; /* Center the title within the section */
+  margin-bottom: 50px; /* Add space between the title and the testimonials */
+}
+
+/* Testimonials Container */
+.testimonials {
+  display: flex;
+  justify-content: space-between; /* Align testimonials horizontally with space between them */
+}
+
+/* Individual Testimonial Card */
+.testimonial {
+  background-color: #EDEFEE; /* Light blue background for each card */
+  padding: 20px; /* Add padding for better spacing inside the card */
+  border-radius: 8px; /* Rounded corners for the card */
+  width: 23%; /* Adjust the width as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  margin-right: 20px;
+}
+
+/* Testimonial Text */
+
+
+.testimonial p {
+  color: #495E57; /* Dark blue text color for the testimonials */
+  font-size: 1em; /* Adjust the font size as needed */
+  line-height: 1.4; /* Adjust line height for better readability */
+  margin: 10; /* Remove default margin to prevent extra spacing */
+}
+
+/* Testimonial Author */
+.testimonial span {
+  color: #495E57; /* Dark blue text color for the author */
+  font-size: 0.9em; /* Adjust the font size as needed */
+  font-style: italic; /* Make the author's name italic */
+  display: block; /* Add a line break after the testimonial text */
+  margin-top: 10px; /* Add space between the text and the author's name */
+}
+/* About Restaurant */
+.aboutrestaurant {
+  background-color: #EDEFEE;
+  color: #495e57;
+  padding: 50px;
+  overflow: hidden; /* Add overflow property to contain floated elements */
+}
+
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items at the start of the cross-axis */
+  margin-left: 100px;
+}
+
+.text-content {
+  flex: 1;
+  text-align: left;
+  max-width: 40%;
+}
+
+.image-content {
+  position: relative;
+}
+
+.image1 {
+  width: 500px; /* Adjust the width as needed */
+  height: auto;
+  margin-bottom: -20px;
+  float: left; /* Float the image to the left */
+}
+
+.image2 {
+  width: 500px; /* Adjust the width as needed */
+  height: auto;
+  margin-left: 100px; /* Adjust the margin or position as needed */
+}
+/* Horizontal Footer Grid */
+.grid-item .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-item .footer-section {
+  flex: 1;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.grid-item .footer-section img {
+  height: 40px;
+  margin-bottom: 10px;
+  margin-left: 40px;
+}
+
+.grid-item .footer-section h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.grid-item .footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.grid-item .footer-section li {
+  margin-bottom: 5px;
+}
+
+.grid-item .footer-section a {
+  text-decoration: none;
+  color: #495e57;
+}
+
+.grid-item .footer-section p {
+  margin: 0;
+  font-size: 0.9em;
 }

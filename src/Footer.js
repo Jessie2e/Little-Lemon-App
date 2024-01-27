@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer>
+    <footer className='grid-item'>
       <div className="footer-content">
         <div className="footer-section">
           <img src='/logo_copy.png' alt="Little Lemon Logo"/>
