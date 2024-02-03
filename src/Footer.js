@@ -10,7 +10,7 @@ function Footer() {
           {/* Add any additional logo-related content */}
         </div>
         <div className="footer-section">
-          <h2>Doormat Navigation</h2>
+          <h2>Navigation</h2>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/menu">Menu</a></li>
@@ -35,6 +35,7 @@ function Footer() {
             Phone: (123) 456-7890
           </p>
         </div>
+      
       </div>
     </footer>
   );
