@@ -10,6 +10,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
+  background-color: #495e57;
+  color: white;
 }
 
 /* Media Queries for Responsiveness */
@@ -34,8 +37,13 @@
 
 .grid-item .nav-list a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: bold;
+  font-size: 1.2em;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+.nav-list a:hover {
+  color: #F4CE14; /* Change the color on hover */
 }
 
 .grid-item .nav-list img {
@@ -60,55 +68,42 @@
   }
 }
 
-/* Hero Section Styles */
-.main-hero {
-  background-color: #495e57;
+/* Hero.css */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 1.25rem 5rem 1.2rem 5rem;
-  margin-top: 1rem;
+  height: 400px; /* Set a fixed height for the hero section */
+  overflow: hidden; /* Hide overflowing content */
 }
 
-.hero-section > h1 {
-  font-size: 3rem;
-  margin-top: 0rem;
-  margin-bottom: -3rem;
-}
-
-.hero-section > h2 {
-  font-size: 2.5rem;
+.hero-content {
+  position: absolute;
+  z-index: 1;
 }
 
 .hero-image {
-  max-height: 17rem;
-  padding-left: 2rem;
-  border-radius: 8px;
-
+  width: 100%; /* Make the image fill the width of its container */
+  height: 100%; /* Make the image fill the height of its container */
+  object-fit: cover; /* Maintain aspect ratio while covering the container */
 }
 
-.hero-image > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-
+/* Optional: Gradient Overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 0;
 }
 
 
-.hero-section button.reserve-button {
-  background-color: #F4CE14;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.hero-section button.reserve-button:hover {
-  background-color: #E0B60A; /* Change the color on hover if desired */
-}
 
 /* Menu Specials Section */
 .menu-specials-section {
@@ -192,22 +187,32 @@
 }
 
 /* Testimonials Container */
-.testimonials {
-  display: flex;
-  justify-content: space-between; /* Align testimonials horizontally with space between them */
+.slick-slider {
+  width: 100%; /* Ensure the slider takes up the full width of its container */
 }
 
-/* Individual Testimonial Card */
+.slick-slide {
+  padding: 0 30px; /* Adjust the padding between slides as needed */
+}
+/* Carousel Dots */
+.slick-dots li button {
+  color: #F4CE14; /* Change the color of the dots to yellow */
+}
+
+.slick-dots li.slick-active button {
+  color: #F4CE14; /* Change the color of the active dot to yellow */
+}
+
 /* Individual Testimonial Card */
 .testimonial {
   background-color: #EDEFEE;
   padding: 20px;
   border-radius: 8px;
-  max-width: 50%; /* Adjust the max-width as needed */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* margin-right: 90px; */
+  height: 100px; /* Set a fixed height for each testimonial box */
+  text-align: center;
+  margin-right: -100px;
 }
-
 
 /* Testimonial Text */
 .testimonial p {
@@ -226,13 +231,14 @@
   margin-top: 10px; /* Add space between the text and the author's name */
 }
 
+
 /* About Restaurant Section */
 .ab-restaurant {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f4ce14;
-  padding: 20px;
+  padding: 50px;
 }
 
 .about-restaurant {
@@ -241,11 +247,15 @@
   align-items: center;
   justify-content: space-between;
   width: 100%; /* Ensure full width */
+  max-width: 1200px; /* Adjust the max-width as needed */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding for better spacing */
 }
 
 .text-content {
   color: #495e57;
-  max-width: 60%;
+  max-width: 50%;
+  margin-left: 50px;
 }
 
 .text-content h2 {
@@ -254,25 +264,27 @@
 
 .text-content p {
   color: #495e57;
-  font-size: 2em;
+  font-size: 1.2em;
 }
 
 .double-image {
-  max-width: 40%;
-  height: auto;
+  max-width: 40%; /* Adjust the max-width as needed */
   position: relative;
+  z-index: 1;
+  margin-top: 13rem; /* Add this line to create space at the top */
 }
 
 .double-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 100%; /* Add this line */
   object-fit: cover;
-  border-radius: 26px; /* Optional: Add a border radius to the image */
+  border-radius: 26px;
 }
 
 .about-2 {
   position: absolute;
-  top: -3.5rem;
+  top: -10.5rem;
   left: 5rem;
 }
 
@@ -511,12 +523,27 @@
   width: 150px;
   padding: 10px;
   margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adding transition for a smooth effect */
+}
+
+.avail-buttons:hover {
+  background-color: #e0e0e0; /* Change the background color on hover */
+}
+
+.avail-buttons.active {
+  background-color: #6ab04c; /* Change the background color when the button is clicked */
+  color: #fff; /* Change the text color for better visibility */
 }
 
 .avail-inputs {
   color: #495e57;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 50px;
 }
 
 .form-input input[type="checkbox"] {

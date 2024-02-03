@@ -1,9 +1,9 @@
 // Reservation.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Reservation = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const [formData, setFormData] = useState({
     date: '',
@@ -29,7 +29,7 @@ const Reservation = () => {
 
     // Update the current step and navigate to the next page
     setCurrentStep(currentStep + 1);
-    navigate('/availability');
+    history.push('/availability');
   };
 
   const updateProgressBar = () => {
@@ -41,6 +41,7 @@ const Reservation = () => {
   React.useEffect(() => {
     updateProgressBar();
   }, [currentStep]);
+
 
   return (
     <div className='reservation-container'>

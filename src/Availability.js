@@ -53,12 +53,12 @@ useEffect(() => {
       </div>
       {/* Email input */}
       <div className='avail-inputs'>
-        <div>
+        <div className='email'>
           <label>Email:</label>
           <input type="email" />
         </div>
         {/* Checkboxes */}
-        <div>
+        <div className='cb'>
           <label>
             <input
               type="checkbox"
@@ -66,6 +66,7 @@ useEffect(() => {
             />{' '}
             Become a little lemon member
           </label>
+          <br />
           <label>
             <input type="checkbox" /> Continue as guest
           </label>

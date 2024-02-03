@@ -1,6 +1,7 @@
 // Menu.js
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+import Checkout from './Checkout';
 
 const Menu = () => {
   // Dummy menu data
@@ -9,7 +10,7 @@ const Menu = () => {
       id: 1,
       category: 'Breakfast',
       title: 'Greek Omelette',
-      cost: '$9.99',
+      cost: '9.99',
       description: 'Fluffy omelette with feta cheese, tomatoes, and olives.',
       image: 'restaurant.jpg',
     },
@@ -17,7 +18,7 @@ const Menu = () => {
       id: 2,
       category: 'Breakfast',
       title: 'Yogurt Parfait',
-      cost: '$7.99',
+      cost: '7.99',
       description: 'Greek yogurt with honey, granola, and fresh berries.',
       image: 'lemon_dessert.jpg',
     },
@@ -25,7 +26,7 @@ const Menu = () => {
       id: 3,
       category: 'Lunch',
       title: 'Hummus Platter',
-      cost: '$11.99',
+      cost: '11.99',
       description: 'Creamy hummus served with pita bread, olives, and cucumbers.',
       image: 'bread.png',
     },
@@ -33,7 +34,7 @@ const Menu = () => {
       id: 4,
       category: 'Lunch',
       title: 'Greek Salad',
-      cost: '$10.99',
+      cost: '10.99',
       description: 'Delight in the crisp and refreshing combination of cucumbers, tomatoes, Kalamata olives, and creamy feta cheese with our authentic Greek Salad.',
       image: 'greek_salad.jpg',
     },
@@ -41,7 +42,7 @@ const Menu = () => {
       id: 5,
       category: 'Dinner',
       title: 'Bruschetta Chicken',
-      cost: '$14.99',
+      cost: '14.99',
       description: 'Grilled chicken breast topped with tomato bruschetta and feta.',
       image: 'bread.png',
     },
@@ -49,7 +50,7 @@ const Menu = () => {
       id: 6,
       category: 'Dinner',
       title: 'Lemon Herb Salmon',
-      cost: '$16.99',
+      cost: '16.99',
       description: 'Salmon fillet marinated in lemon and herbs, served with roasted vegetables.',
       image: 'greek_salad.jpg',
     },
@@ -57,7 +58,7 @@ const Menu = () => {
       id: 7,
       category: 'Dessert',
       title: 'Lemon Dessert',
-      cost: '$8.50',
+      cost: '8.50',
       description: 'Indulge in the zesty delight of our lemon cake. A buttery cake that cradles a velvety lemon custard, topped with a cloud of whipped cream.',
       image: 'lemon_dessert.jpg',
     },
@@ -65,11 +66,29 @@ const Menu = () => {
       id: 8,
       category: 'Dessert',
       title: 'Baklava',
-      cost: '$6.99',
+      cost: '6.99',
       description: 'Layers of phyllo dough, chopped nuts, and sweet honey, baked to perfection.',
       image: 'bread.png',
     },
   ];
+  // State to track the quantity for each menu item
+  const [itemQuantity, setItemQuantity] = useState({});
+
+  // Function to handle incrementing the quantity
+  const handleIncrement = (itemId) => {
+    setItemQuantity((prevQuantity) => ({
+      ...prevQuantity,
+      [itemId]: (prevQuantity[itemId] || 0) + 1,
+    }));
+  };
+
+  // Function to handle decrementing the quantity
+  const handleDecrement = (itemId) => {
+    setItemQuantity((prevQuantity) => ({
+      ...prevQuantity,
+      [itemId]: Math.max((prevQuantity[itemId] || 0) - 1, 0),
+    }));
+  };
 
   // State to track the selected category
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -77,7 +96,10 @@ const Menu = () => {
   // Filter menu items based on the selected category
   const filteredMenu = selectedCategory === 'All' ? menuItems : menuItems.filter(item => item.category === selectedCategory);
 
-  return (
+   // Calculate total items in the cart
+   const totalItems = Object.values(itemQuantity).reduce((total, quantity) => total + quantity, 0);
+
+   return (
     <div className="menu-page">
       {/* Category buttons */}
       <div className="category-buttons">
@@ -88,9 +110,9 @@ const Menu = () => {
         <button onClick={() => setSelectedCategory('Dessert')}>Dessert</button>
       </div>
 
-        {/* Menu items */}
-        <div className="menu-card-container">
-        {filteredMenu.map(item => (
+       {/* Menu items */}
+       <div className="menu-card-container">
+        {filteredMenu.map((item) => (
           <div key={item.id} className="menu-card">
             <div className="menu-card-content">
               <img src={item.image} alt={item.title} className="menu-image" />
@@ -100,11 +122,11 @@ const Menu = () => {
                 <p>{item.description}</p>
                 {/* Add to cart functionality */}
                 <div className="cart-actions">
-                  <button>Add to Cart</button>
+                  <button onClick={() => handleIncrement(item.id)}>Add to Cart</button>
                   <div className="counter">
-                    <button>+</button>
-                    <span>0</span>
-                    <button>-</button>
+                    <button onClick={() => handleDecrement(item.id)}>-</button>
+                    <span>{itemQuantity[item.id] || 0}</span>
+                    <button onClick={() => handleIncrement(item.id)}>+</button>
                   </div>
                 </div>
               </div>
@@ -112,8 +134,30 @@ const Menu = () => {
           </div>
         ))}
       </div>
-    </div>
-  );
+
+     {/* Checkout button */}
+<div className="checkout-button-container">
+<Link to={{
+  pathname: "/checkout",
+  state: { cartItems: Object.entries(itemQuantity).map(([id, quantity]) => ({ id, quantity, ...menuItems.find(item => item.id === parseInt(id)) })) }
+}}>
+  <button className="checkout-button">Checkout ({totalItems} items)</button>
+</Link>
+
+
+</div>
+
+{/* Render the Checkout component with cartItems prop */}
+{console.log('cartItems:', Object.entries(itemQuantity).map(([id, quantity]) => ({ id, quantity, ...menuItems.find(item => item.id === parseInt(id)) })))}
+<Checkout
+  cartItems={Object.entries(itemQuantity).map(([id, quantity]) => {
+    const menuItem = menuItems.find(item => item.id === parseInt(id));
+    return { id, quantity, ...menuItem };
+  })}
+/>
+
+</div>
+);
 };
 
 export default Menu;
