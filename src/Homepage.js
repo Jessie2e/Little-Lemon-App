@@ -1,8 +1,8 @@
-// Main.js
+// Homepage.js
 import React from 'react';
 import './App.css';
 
-function Main() {
+function Homepage() {
   return (
     <main className='grid-item'>
       {/* Hero Section */}
@@ -83,4 +83,4 @@ function Main() {
 );
 }
 
-export default Main;
+export default Homepage;

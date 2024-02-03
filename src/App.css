@@ -60,36 +60,41 @@
   }
 }
 
-/* Main.js */
-
-/* Styles for Hero Section */
-.hero-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* Hero Section Styles */
+.main-hero {
   background-color: #495e57;
-  padding: 20px;
-}
-
-.hero-section div {
-  color: #f4ce14;
-  max-width: 60%;
-}
-
-.hero-section h1 {
-  font-size: 7em;
-}
-
-.hero-section p {
   color: white;
-  font-size: 5em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1.25rem 5rem 1.2rem 5rem;
+  margin-top: 1rem;
 }
 
-.hero-section img {
-  max-width: 40%;
-  height: auto;
-  border-radius: 26px; /* Optional: Add a border radius to the image */
+.hero-section > h1 {
+  font-size: 3rem;
+  margin-top: 0rem;
+  margin-bottom: -3rem;
 }
+
+.hero-section > h2 {
+  font-size: 2.5rem;
+}
+
+.hero-image {
+  max-height: 17rem;
+  padding-left: 2rem;
+  border-radius: 8px;
+
+}
+
+.hero-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+
+}
+
 
 .hero-section button.reserve-button {
   background-color: #F4CE14;
@@ -104,48 +109,74 @@
 .hero-section button.reserve-button:hover {
   background-color: #E0B60A; /* Change the color on hover if desired */
 }
+
 /* Menu Specials Section */
 .menu-specials-section {
-  background-color: #ffffff; /* White background for the entire section */
-  padding: 20px; /* Add padding for better spacing */
+  background-color: #ffffff;
+  padding: 70px;
 }
 
 /* Menu Specials Container */
 .menu-specials {
   display: flex;
-  justify-content: space-between; /* Align menu specials horizontally with space between them */
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
-/* Individual Menu Special Card */
 .menu-special {
-  background-color: #EDEFEE; /* Light blue background for each card */
-  padding: 20px; /* Add padding for better spacing inside the card */
-  border-radius: 8px; /* Rounded corners for the card */
-  width: 30%; /* Adjust the width as needed */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  background-color: #EDEFEE;
+  padding: 20px;
+  border-radius: 20px;
+  width: 30%; /* Adjust the width based on your preference */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
 }
 
 /* Menu Special Image */
 .menu-special img {
-  width: 100%; /* Make sure the image fills the entire width of the card */
-  border-radius: 8px; /* Rounded corners for the image */
-  margin-bottom: 10px; /* Add some space between the image and the text */
+  width: 100%;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 /* Menu Special Title */
 .menu-special h3 {
-  color: #333333; /* Dark text color for the title */
-  font-size: 1.5em; /* Adjust the font size as needed */
-  margin-bottom: 10px; /* Add some space between the title and the description */
+  color: #333333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  height: 60px;
+  overflow: hidden;
 }
 
 /* Menu Special Description */
 .menu-special p {
-  color: #666666; /* Slightly darker text color for the description */
-  font-size: 1em; /* Adjust the font size as needed */
-  line-height: 1.4; /* Adjust line height for better readability */
-  margin: 0; /* Remove default margin to prevent extra spacing */
+  color: #666666;
+  font-size: 1em;
+  line-height: 1.4;
+  margin: 20px 0;
+  margin-left: 50px;
 }
+
+/* Carousel Menu */
+/* Adjustments for Carousel Menu */
+
+.menu-special-image {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.menu-special-content {
+  padding: 10px;
+  text-align: center;
+  max-width: 70%;
+  margin: auto;
+}
+
+
 /* Testimonials Section */
 .testimonials-section {
   background-color: #495E57; /* Dark blue background for the entire section */
@@ -167,18 +198,18 @@
 }
 
 /* Individual Testimonial Card */
+/* Individual Testimonial Card */
 .testimonial {
-  background-color: #EDEFEE; /* Light blue background for each card */
-  padding: 20px; /* Add padding for better spacing inside the card */
-  border-radius: 8px; /* Rounded corners for the card */
-  width: 23%; /* Adjust the width as needed */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
-  margin-right: 20px;
+  background-color: #EDEFEE;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 50%; /* Adjust the max-width as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* margin-right: 90px; */
 }
 
+
 /* Testimonial Text */
-
-
 .testimonial p {
   color: #495E57; /* Dark blue text color for the testimonials */
   font-size: 1em; /* Adjust the font size as needed */
@@ -194,43 +225,57 @@
   display: block; /* Add a line break after the testimonial text */
   margin-top: 10px; /* Add space between the text and the author's name */
 }
-/* About Restaurant */
-.aboutrestaurant {
-  background-color: #EDEFEE;
-  color: #495e57;
-  padding: 50px;
-  overflow: hidden; /* Add overflow property to contain floated elements */
+
+/* About Restaurant Section */
+.ab-restaurant {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f4ce14;
+  padding: 20px;
 }
 
-.about-content {
+.about-restaurant {
   display: flex;
+  flex-direction: row; /* Ensure horizontal layout */
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start; /* Align items at the start of the cross-axis */
-  margin-left: 100px;
+  width: 100%; /* Ensure full width */
 }
 
 .text-content {
-  flex: 1;
-  text-align: left;
-  max-width: 40%;
+  color: #495e57;
+  max-width: 60%;
 }
 
-.image-content {
+.text-content h2 {
+  font-size: 3em;
+}
+
+.text-content p {
+  color: #495e57;
+  font-size: 2em;
+}
+
+.double-image {
+  max-width: 40%;
+  height: auto;
   position: relative;
 }
 
-.image1 {
-  width: 500px; /* Adjust the width as needed */
-  height: auto;
-  margin-bottom: -20px;
-  float: left; /* Float the image to the left */
+.double-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 26px; /* Optional: Add a border radius to the image */
 }
 
-.image2 {
-  width: 500px; /* Adjust the width as needed */
-  height: auto;
-  margin-left: 100px; /* Adjust the margin or position as needed */
+.about-2 {
+  position: absolute;
+  top: -3.5rem;
+  left: 5rem;
 }
+
 /* Horizontal Footer Grid */
 .grid-item .footer-content {
   display: flex;
@@ -277,4 +322,223 @@
 .grid-item .footer-section p {
   margin: 0;
   font-size: 0.9em;
+}
+
+/* Carousel Menu */
+/* Adjustments for Carousel Menu */
+
+.menu-special-image {
+  height: 300px; /* Adjust the height as needed */
+  width: 100%; /* Ensure the image takes the full width of its container */
+  object-fit: cover; /* Ensure the image covers the container while maintaining its aspect ratio */
+}
+
+.menu-special-content {
+  padding: 10px; /* Add padding to the content for spacing */
+  text-align: center; /* Center-align text content */
+  max-width: 90%; /* Limit the width of text content */
+  margin: auto; /* Center the content horizontally */
+}
+
+
+
+
+
+
+
+/* Menu.css */
+.menu-page {
+  padding: 20px;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-around; /* Center and space buttons equally */
+  width: 100%; /* Take up the full width of the container */
+}
+
+.category-buttons button {
+  flex-grow: 1; /* Allow buttons to grow and shrink equally */
+  background-color: #F4CE14;
+  color: #495e57;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.category-buttons button:hover {
+  background-color: #E0B60A;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.menu-card {
+  background-color: #EDEFEE;
+  padding: 20px;
+  border-radius: 8px;
+}
+.menu-card-content {
+  display: flex;
+}
+
+.menu-card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Adjust menu-image styles */
+.menu-image {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Adjust menu-details styles */
+.menu-details {
+  max-width: 50%;
+  margin-left: 20px;
+}
+
+.menu-details button,
+.menu-details h3,
+.menu-details p,
+.cart-actions button,
+.counter button {
+  color: #495e57;
+}
+
+.cart-actions,
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.counter span {
+  color: #495e57;
+}
+
+
+
+
+.reservation-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 50px;
+  color: #495e57;
+  border-radius: 8px;
+  text-align: center; /* Center the text */
+}
+
+/* ... Your existing CSS ... */
+
+.form-input {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  background-color: #EDEFEE;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form-input > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.form-input label {
+  color: #495e57;
+  margin-right: 10px;
+}
+
+.form-input input,
+.form-input select {
+  color: #495e57;
+  border-radius: 8px;
+  border: 1px solid #495e57;
+  text-align: center;
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.reserve-button {
+  background-color: #F4CE14;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto; /* Add margin:auto to center the button horizontally */
+}
+
+.reserve-button:hover {
+  background-color: #E0B60A;
+}
+
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.avail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avail-buttons {
+  color: #495e57;
+  border-radius: 8px;
+  border: 1px solid #495e57;
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.avail-inputs {
+  color: #495e57;
+  padding: 10px;
+  margin: 10px;
+}
+
+.form-input input[type="checkbox"] {
+  margin-right: -65px;
+}
+.avail-h {
+  color: #495e57;
+  text-align: center;
+}
+
+/* Add or update this style for the progress-bar in your CSS */
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #F4CE14; /* Adjust the color if needed */
+  height: 5px; /* Adjust the height of the progress bar */
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background-color: #495e57; /* Adjust the color if needed */
 }
