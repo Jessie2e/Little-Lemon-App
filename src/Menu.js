@@ -1,6 +1,6 @@
 // Menu.js
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Checkout from './Checkout';
 
 const Menu = () => {
@@ -71,93 +71,110 @@ const Menu = () => {
       image: 'bread.png',
     },
   ];
-  // State to track the quantity for each menu item
-  const [itemQuantity, setItemQuantity] = useState({});
+   // State to track the quantity for each menu item
+   const [itemQuantity, setItemQuantity] = useState({});
 
-  // Function to handle incrementing the quantity
-  const handleIncrement = (itemId) => {
-    setItemQuantity((prevQuantity) => ({
-      ...prevQuantity,
-      [itemId]: (prevQuantity[itemId] || 0) + 1,
-    }));
-  };
-
-  // Function to handle decrementing the quantity
-  const handleDecrement = (itemId) => {
-    setItemQuantity((prevQuantity) => ({
-      ...prevQuantity,
-      [itemId]: Math.max((prevQuantity[itemId] || 0) - 1, 0),
-    }));
-  };
-
-  // State to track the selected category
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  // Filter menu items based on the selected category
-  const filteredMenu = selectedCategory === 'All' ? menuItems : menuItems.filter(item => item.category === selectedCategory);
-
+   // State to track the selected category
+   const [selectedCategory, setSelectedCategory] = useState('All');
+ 
+   // Function to handle incrementing the quantity
+   const handleIncrement = (itemId) => {
+     setItemQuantity((prevQuantity) => ({
+       ...prevQuantity,
+       [itemId]: (prevQuantity[itemId] || 0) + 1,
+     }));
+   };
+ 
+   // Function to handle decrementing the quantity
+   const handleDecrement = (itemId) => {
+     setItemQuantity((prevQuantity) => ({
+       ...prevQuantity,
+       [itemId]: Math.max((prevQuantity[itemId] || 0) - 1, 0),
+     }));
+   };
+ 
    // Calculate total items in the cart
    const totalItems = Object.values(itemQuantity).reduce((total, quantity) => total + quantity, 0);
+ 
+   // Function to update totalItems in Nav.js
+   const updateTotalItems = () => {
+     if (window.updateTotalItems) {
+       window.updateTotalItems(totalItems);
+     }
+   };
+ 
+   // useEffect to update totalItems when the component mounts or itemQuantity changes
+   useEffect(() => {
+     updateTotalItems();
+   }, [itemQuantity]);
+ 
+   // Filter menu items based on the selected category
+   const filteredMenu = selectedCategory === 'All' ? menuItems : menuItems.filter(item => item.category === selectedCategory);
+ 
+  
 
-   return (
-    <div className="menu-page">
-      {/* Category buttons */}
-      <div className="category-buttons">
-        <button onClick={() => setSelectedCategory('All')}>All</button>
-        <button onClick={() => setSelectedCategory('Breakfast')}>Breakfast</button>
-        <button onClick={() => setSelectedCategory('Lunch')}>Lunch</button>
-        <button onClick={() => setSelectedCategory('Dinner')}>Dinner</button>
-        <button onClick={() => setSelectedCategory('Dessert')}>Dessert</button>
-      </div>
+ return (
+   <div className="menu-page">
+     {/* Category buttons */}
+     <div className="category-buttons">
+       <button onClick={() => setSelectedCategory('All')}>All</button>
+       <button onClick={() => setSelectedCategory('Breakfast')}>Breakfast</button>
+       <button onClick={() => setSelectedCategory('Lunch')}>Lunch</button>
+       <button onClick={() => setSelectedCategory('Dinner')}>Dinner</button>
+       <button onClick={() => setSelectedCategory('Dessert')}>Dessert</button>
+     </div>
 
-       {/* Menu items */}
-       <div className="menu-card-container">
-        {filteredMenu.map((item) => (
-          <div key={item.id} className="menu-card">
-            <div className="menu-card-content">
-              <img src={item.image} alt={item.title} className="menu-image" />
-              <div className="menu-details">
-                <h3>{item.title}</h3>
-                <p>{item.cost}</p>
-                <p>{item.description}</p>
-                {/* Add to cart functionality */}
-                <div className="cart-actions">
-                  <button onClick={() => handleIncrement(item.id)}>Add to Cart</button>
-                  <div className="counter">
-                    <button onClick={() => handleDecrement(item.id)}>-</button>
-                    <span>{itemQuantity[item.id] || 0}</span>
-                    <button onClick={() => handleIncrement(item.id)}>+</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+     {/* Menu items */}
+     <div className="menu-card-container">
+       {filteredMenu.map((item) => (
+         <div key={item.id} className="menu-card">
+           <div className="menu-card-content">
+             <img src={item.image} alt={item.title} className="menu-image" />
+             <div className="menu-details">
+               <h3>{item.title}</h3>
+               <p>{item.cost}</p>
+               <p>{item.description}</p>
+               {/* Add to cart functionality */}
+               <div className="cart-actions">
+                 <button onClick={() => handleIncrement(item.id)}>Add to Cart</button>
+                 <div className="counter">
+                   <button onClick={() => handleDecrement(item.id)}>-</button>
+                   <span>{itemQuantity[item.id] || 0}</span>
+                   <button onClick={() => handleIncrement(item.id)}>+</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       ))}
+     </div>
 
      {/* Checkout button */}
-<div className="checkout-button-container">
-<Link to={{
-  pathname: "/checkout",
-  state: { cartItems: Object.entries(itemQuantity).map(([id, quantity]) => ({ id, quantity, ...menuItems.find(item => item.id === parseInt(id)) })) }
-}}>
-  <button className="checkout-button">Checkout ({totalItems} items)</button>
-</Link>
+     <div className="checkout-button-container">
+       <Link
+         to={{
+           pathname: "/checkout",
+           state: {
+             cartItems: Object.entries(itemQuantity).map(([id, quantity]) => {
+               const menuItem = menuItems.find(item => item.id === parseInt(id));
+               return { id, quantity, image: menuItem?.image || '', ...menuItem };
+             })
+           }
+         }}
+       >
+         <button className="checkout-button">Checkout ({totalItems} items)</button>
+       </Link>
+     </div>
 
-
-</div>
-
-{/* Render the Checkout component with cartItems prop */}
-{console.log('cartItems:', Object.entries(itemQuantity).map(([id, quantity]) => ({ id, quantity, ...menuItems.find(item => item.id === parseInt(id)) })))}
-<Checkout
-  cartItems={Object.entries(itemQuantity).map(([id, quantity]) => {
-    const menuItem = menuItems.find(item => item.id === parseInt(id));
-    return { id, quantity, ...menuItem };
-  })}
-/>
-
-</div>
-);
+     {/* Render the Checkout component with cartItems prop */}
+     <Checkout
+       cartItems={Object.entries(itemQuantity).map(([id, quantity]) => {
+         const menuItem = menuItems.find(item => item.id === parseInt(id));
+         return { id, quantity, ...menuItem };
+       })}
+     />
+   </div>
+ );
 };
 
 export default Menu;
