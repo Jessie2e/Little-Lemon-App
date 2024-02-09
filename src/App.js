@@ -13,6 +13,7 @@ import Reservation from './Reservation';
 import About from './About';
 import Availability from './Availability';
 import Checkout from './Checkout';
+import ReservationConfirmation from './ReservationConfirmation';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/availability" component={Availability} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/reservationconfirmation" component={ReservationConfirmation} />
       </Switch>
       <Footer />
     </Router>

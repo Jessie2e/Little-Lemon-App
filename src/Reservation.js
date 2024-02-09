@@ -1,21 +1,22 @@
-// Reservation.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import './App.css'; // Import your CSS file
 
 const Reservation = () => {
-  const history = useHistory();
-
   const [formData, setFormData] = useState({
     date: '',
     timeframe: '',
     numberOfGuests: '',
     occasion: '',
+    otherOccasion: '', // New state for other occasion
   });
 
   const occasions = ['Work Event', 'Birthday', 'Anniversary', 'Date Night', 'Other'];
+  const history = useHistory(); // Initialize useHistory
 
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 2;
+  const totalSteps = 3; // Changed to 3 steps
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,31 +25,45 @@ const Reservation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+
+    if (selectedDate < today) {
+      setErrorMessage('Please select a date on or after today.');
+      return; // Stop form submission if date is before today
+    }
+
     console.log('Form submitted:', formData);
+    // Reset error message
+    setErrorMessage('');
 
     // Update the current step and navigate to the next page
-    setCurrentStep(currentStep + 1);
-    history.push('/availability');
+    setCurrentStep(currentStep + 1); // Move to the next step
+    history.push({
+      pathname: '/availability',
+      state: {
+        formData: {
+          ...formData, // Include all form data
+        },
+        date: formData.date,
+        timeframe: formData.timeframe,
+        numberOfGuests: formData.numberOfGuests,
+        occasion: formData.occasion,
+      },
+    });
   };
 
-  const updateProgressBar = () => {
+  useEffect(() => {
     const progressWidth = (currentStep / totalSteps) * 100;
     document.getElementById('progress').style.width = `${progressWidth}%`;
-  };
-
-  // Call the updateProgressBar function whenever currentStep changes
-  React.useEffect(() => {
-    updateProgressBar();
-  }, [currentStep]);
-
+  }, [currentStep, totalSteps]);
 
   return (
     <div className='reservation-container'>
-      <h2>Reserve Your Table With Us</h2>
       <div className="progress-bar">
         <div className="progress" id="progress"></div>
       </div>
+      <h2>Reserve Your Table With Us</h2>
       <form onSubmit={handleSubmit}>
         <div className='form-input'>
           <label>Date:</label>
@@ -61,6 +76,7 @@ const Reservation = () => {
             required
           />
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className='form-input'>
           <label>Select Timeframe:</label>
           <br />
@@ -107,6 +123,19 @@ const Reservation = () => {
             ))}
           </select>
         </div>
+        {formData.occasion === 'Other' && (
+          <div className='form-input'>
+            <label>Other Occasion:</label>
+            <br />
+            <input
+              type="text"
+              name="otherOccasion"
+              value={formData.otherOccasion}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        )}
         <button className='reserve-button' type="submit">View Availability</button>
       </form>
     </div>

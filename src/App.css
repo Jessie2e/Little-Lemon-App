@@ -37,7 +37,7 @@
 
 .grid-item .nav-list a {
   text-decoration: none;
-  color: ;
+  color: #495E57;
   font-weight: bold;
   font-size: 1.2em;
   transition: color 0.3s ease; /* Smooth transition for color change */
@@ -565,20 +565,20 @@
   text-align: center;
 }
 
-/* Add or update this style for the progress-bar in your CSS */
+.reservation-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .progress-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #F4CE14; /* Adjust the color if needed */
-  height: 5px; /* Adjust the height of the progress bar */
+  background-color: #F4CE14;
+  height: 5px;
 }
 
 .progress {
   height: 100%;
   width: 0;
-  background-color: #495e57; /* Adjust the color if needed */
+  background-color: #495e57;
 }
 
 
