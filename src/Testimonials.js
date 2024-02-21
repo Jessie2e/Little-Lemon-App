@@ -41,6 +41,7 @@ function Testimonials() {
             <span>{testimonial.author}</span>
           </div>
         ))}
+        <div></div>
       </Slider>
     </section>
   );

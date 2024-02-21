@@ -4,72 +4,16 @@ import './App.css';
 
 const Availability = ({ location }) => {
   const history = useHistory();
-  console.log('Location state:', location.state); // Log the location.state object
-
-  const { date, timeframe, formDataFromReservation } = location.state; // Extracting date, timeframe, and formDataFromReservation from location state
-  console.log('Location props in Availability:', location);
-
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
   const [showPasswordFields, setShowPasswordFields] = useState(false);
-  const [formData, setFormData] = useState({
-
-    ...formDataFromReservation // Spread formDataFromReservation to include any additional data passed from Reservation.js
-  });
-  console.log('FormData from Reservation:', formDataFromReservation);
-
+  const [showMemberFields, setShowMemberFields] = useState(false);
+  const [alreadyMember, setAlreadyMember] = useState(false);
+  const [formData, setFormData] = useState({});
   const [currentStep, setCurrentStep] = useState(2);
-  const totalSteps = 3; // Changed to 3 steps
+  const totalSteps = 3;
 
-  const handleMemberCheckboxChange = (e) => {
-    setShowPasswordFields(e.target.checked);
-  };
+  const { date, timeframe, numberOfGuests, occasion, formDataFromReservation } = location.state || {};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log('Field Name:', name);
-    console.log('Field Value:', value);
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form data:', formData);
-    console.log('Date:', date);
-    console.log('Timeframe:', timeframe);
-    console.log('Email:', formData.email);
-    console.log('Number of Guests:', formData.numberOfGuests); // Access numberOfGuests from formData
-    console.log('Occasion:', formData.occasion); // Access occasion from formData
-    console.log('Other Occasion:', formData.otherOccasion);
-    console.log('Time Slot:', timeframe);
-    console.log('Form submitted:', formData);
-  
-    // Update the current step
-    setCurrentStep(currentStep + 1);
-  
-    // Navigate to ReservationConfirmation page after form submission
-    history.push({
-      pathname: '/ReservationConfirmation',
-      state: {
-        formData: formData,
-        date: date,
-        timeframe: timeframe,
-        numberOfGuests: formData.numberOfGuests, // Access numberOfGuests from formData
-        occasion: formData.occasion, // Access occasion from formData
-        formDataFromReservation: {
-          formData: formData,
-          date: date,
-          timeframe: timeframe,
-          numberOfGuests: formData.numberOfGuests, // Access numberOfGuests from formData
-          occasion: formData.occasion, // Access occasion from formData
-        },
-      },
-    });
-  };
-
-  // Calculate the progress width based on the current step and total steps
-  const progressWidth = (currentStep / totalSteps) * 100;
-
-  // Define available time slots based on the selected date and timeframe
   useEffect(() => {
     let slots = [];
     if (timeframe === 'Breakfast') {
@@ -84,46 +28,123 @@ const Availability = ({ location }) => {
     setAvailableTimeSlots(slots);
   }, [date, timeframe]);
 
+  const handleMemberCheckboxChange = (e) => {
+    setShowPasswordFields(e.target.checked && !alreadyMember);
+    setShowMemberFields(e.target.checked && alreadyMember);
+  };
+
+  const handleAlreadyMemberCheckboxChange = (e) => {
+    setAlreadyMember(e.target.checked);
+    setShowMemberFields(e.target.checked && !showPasswordFields)  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCurrentStep(currentStep + 1);
+
+    history.push({
+      pathname: '/ReservationConfirmation',
+      state: {
+        formData: formData,
+        date: date,
+        timeframe: timeframe,
+        numberOfGuests: numberOfGuests,
+        occasion: occasion,
+        formDataFromReservation: {
+          formData: formData,
+          date: date,
+          timeframe: timeframe,
+          numberOfGuests: numberOfGuests,
+          occasion: occasion,
+        },
+      },
+    });
+  };
+
+  const progressWidth = (currentStep / totalSteps) * 100;
+
   return (
-    <div>
-      <h2>Choose Availability</h2>
-      <div className='reservation-container'>
-        <div className='progress-bar'>
+    <div className='reservation-container'>
+        <div className='progress-bar' role="progressbar" aria-valuemin="0" aria-valuemax="100">
           <div className='progress' style={{ width: `${progressWidth}%` }}></div>
         </div>
-      </div>
+        <h2>Choose Availability</h2>
+
       <div className='avail-items'>
         <div className='avail-card'>
           {availableTimeSlots.map((timeSlot) => (
-            <button key={timeSlot} className='avail-buttons' onClick={() => handleChange({ target: { name: 'timeSlot', value: timeSlot } })}>{timeSlot}</button>
+             <button
+             key={timeSlot}
+             className={`avail-buttons ${formData.timeSlot === timeSlot ? 'clicked' : ''}`}
+             onClick={() => handleChange({ target: { name: 'timeSlot', value: timeSlot } })}
+             aria-pressed={formData.timeSlot === timeSlot ? 'true' : 'false'}
+           >
+                {timeSlot}
+              </button>
           ))}
         </div>
       </div>
-      <div className='avail-inputs'>
+      <form onSubmit={handleSubmit}>
+      <div className='form-input'>
+        <div className='name'>
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} />
+        </div>
+        <div className='name'>
+          <label htmlFor="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
+        </div>
         <div className='email'>
-          <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
         </div>
         <div className='cb'>
-          <label>
-            <input type="checkbox" onChange={handleMemberCheckboxChange} />
-            Become a little lemon member
-          </label>
+          <div>
+            <label>
+              <input type="checkbox" onChange={handleMemberCheckboxChange} />
+              Become a Little Lemon Member
+            </label>
+          </div>
           <br />
+          <div>
           <label>
-            <input type="checkbox" /> Continue as guest
+            <input type="checkbox" onChange={handleAlreadyMemberCheckboxChange} />
+            Already a Little Lemon Member
           </label>
+          </div>
+          <br />
+          <div>
+          <label>
+            <input type="checkbox" /> Continue as Guest
+          </label>
+          </div>
         </div>
         {showPasswordFields && (
           <div>
-            <label>Create a password:</label>
-            <input type="password" />
-            <label>Confirm password:</label>
-            <input type="password" />
+            <label htmlFor="password">Create a password:</label>
+            <input type="password" id="password" />
+            <label htmlFor="confirmPassword">Confirm password:</label>
+            <input type="password" id="confirmPassword" />
+          </div>
+        )}
+        {showMemberFields && (
+          <div>
+            <label htmlFor="memberEmail">Member Email:</label>
+            <input type="email" id="memberEmail" name="memberEmail" value={formData.memberEmail} onChange={handleChange} />
+            <label htmlFor="memberPassword">Member Password:</label>
+            <input type="password" id="memberPassword" name="memberPassword" value={formData.memberPassword} onChange={handleChange} />
           </div>
         )}
       </div>
-      <button className='reserve-button' onClick={handleSubmit}>Reserve the Table</button>
+      <button className='reserve-button' type="submit">Reserve Your Table</button>
+      </form>
     </div>
   );
 };

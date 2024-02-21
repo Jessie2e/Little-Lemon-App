@@ -17,7 +17,7 @@ const Specials = () => {
       id: 2,
       name: 'Bruschetta',
       image: '/bread.png',
-      description: 'Sliced baguette topped with a medley of diced tomatoes, fresh basil, garlic, and extra virgin olive oil. A classic Italian appetizer that\'s light, flavorful, and perfect for sharing.',
+      description: 'Sliced baguette topped with a farm fresh medley of diced tomatoes, fresh basil, garlic, and extra virgin olive oil. A classic Italian appetizer that pairs perfectly with any White wine!',
     },
     {
       id: 3,
@@ -38,19 +38,22 @@ const Specials = () => {
   return (
     <section className='menu-specials-section'>
       <h2>Menu Specials</h2>
-      <Slider {...settings}>
-        {menuSpecials.map((special) => (
-          <div key={special.id} className='menu-special'>
-            <Link to={`/special/${special.name.toLowerCase().replace(/\s/g, '-')}`}>
-              <img src={special.image} alt={special.name} className='menu-special-image' />
-              <div className='menu-special-content'>
-                <h3>{special.name}</h3>
-                <p>{special.description}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </Slider>
+      <div class="custom-carousel">
+        <Slider {...settings}>
+          {menuSpecials.map((special) => (
+            <div key={special.id} className='menu-special'>
+              <Link to={`/special/${special.name.toLowerCase().replace(/\s/g, '-')}`}>
+                <img src={special.image} alt={special.name} className='menu-special-image' />
+                <div className='menu-special-content'>
+                  <h3>{special.name}</h3>
+                  <p>{special.description}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </Slider>
+        <p></p>
+      </div>
     </section>
   );
 }

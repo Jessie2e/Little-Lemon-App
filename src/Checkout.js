@@ -32,7 +32,7 @@ const Checkout = ({ cartItems: propCartItems }) => {
 
   return (
     <div className="checkout-container">
-      <h2>Checkout</h2>
+      <h2>Your Cart</h2>
       <div className='checkout-card'>
         <ul>
             {(cartItems || [])
@@ -45,6 +45,7 @@ const Checkout = ({ cartItems: propCartItems }) => {
                     </p>
                     <p className="checkout-details">
                       {item.title} - ${formatCost(item.quantity * item.cost)}
+                      <br />
                       <button onClick={() => increaseQuantity(item.id)}>+</button>
                       {item.quantity}
                       <button onClick={() => decreaseQuantity(item.id)}>-</button>

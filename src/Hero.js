@@ -1,6 +1,7 @@
 // Hero.js
 import React from 'react';
-import './App.css'; // Update the import to match your CSS file name
+import { Link } from 'react-router-dom';
+import './App.css';
 
 function Hero() {
   return (
@@ -8,7 +9,8 @@ function Hero() {
       <div className='hero-content'>
         <h1>The Little Lemon</h1>
         <p>We serve delicious Mediterranean cuisine with a modern twist.</p>
-        <button className='reserve-button'>Reserve A Table</button>
+        {/* Use Link component and style it as a button */}
+        <Link to='/reservation' className='reserve-button'>Reserve A Table</Link>
       </div>
       <img src='/restauranfood.jpg' alt='Bread Appetizers' className='hero-image' />
     </section>

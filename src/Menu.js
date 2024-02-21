@@ -114,9 +114,9 @@ const Menu = () => {
   
 
  return (
-   <div className="menu-page">
+   <div className="menu-page"  aria-label='Menu'>
      {/* Category buttons */}
-     <div className="category-buttons">
+     <div className="category-buttons" role='navigation'>
        <button onClick={() => setSelectedCategory('All')}>All</button>
        <button onClick={() => setSelectedCategory('Breakfast')}>Breakfast</button>
        <button onClick={() => setSelectedCategory('Lunch')}>Lunch</button>
@@ -125,9 +125,9 @@ const Menu = () => {
      </div>
 
      {/* Menu items */}
-     <div className="menu-card-container">
+     <div className="menu-card-container" role='menu'>
        {filteredMenu.map((item) => (
-         <div key={item.id} className="menu-card">
+         <div key={item.id} className="menu-card" role='menuitem'>
            <div className="menu-card-content">
              <img src={item.image} alt={item.title} className="menu-image" />
              <div className="menu-details">
@@ -150,7 +150,7 @@ const Menu = () => {
      </div>
 
      {/* Checkout button */}
-     <div className="checkout-button-container">
+     <div className="avail-card">
        <Link
          to={{
            pathname: "/checkout",
@@ -162,17 +162,11 @@ const Menu = () => {
            }
          }}
        >
-         <button className="checkout-button">Checkout ({totalItems} items)</button>
+         <button className='avail-buttons'>Checkout ({totalItems} items)</button>
        </Link>
      </div>
 
-     {/* Render the Checkout component with cartItems prop */}
-     <Checkout
-       cartItems={Object.entries(itemQuantity).map(([id, quantity]) => {
-         const menuItem = menuItems.find(item => item.id === parseInt(id));
-         return { id, quantity, ...menuItem };
-       })}
-     />
+    
    </div>
  );
 };

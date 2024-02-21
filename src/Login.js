@@ -1,95 +1,53 @@
 import React, { useState } from 'react';
+import './App.css';
 
-const ReservationForm = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    date: '',
-    timeframe: '',
-    numberOfGuests: '',
-    occasion: '',
-    otherOccasion: '',
-    email: '',
-    // add more fields as needed
-  });
 
-  const occasions = ['Birthday', 'Anniversary', 'Other'];
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle form submission logic
-  };
-
-  const renderStepOne = () => (
-    <>
-      <h2>Reserve Your Table With Us</h2>
-      <form onSubmit={() => setStep(2)}>
-        {/* Step One Inputs */}
-        <div className='form-input'>
-          <label>Date:</label>
-          <br />
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {/* Additional Step One Inputs... */}
-        <button type="submit">Next</button>
-      </form>
-    </>
-  );
-
-  const renderStepTwo = () => (
-    <>
-      <h2>Select Timeframe</h2>
-      <form onSubmit={() => setStep(3)}>
-        {/* Step Two Inputs */}
-        {/* Similar to Step One, but adjust based on selected timeframe */}
-        <button type="submit">Next</button>
-      </form>
-    </>
-  );
-
-  const renderStepThree = () => (
-    <>
-      <h2>Confirmation</h2>
-      <div>
-        <p>Date: {formData.date}</p>
-        {/* Recap other form questions and responses */}
-      </div>
-      {/* Button to submit the final reservation */}
-      <button type="submit">Confirm Reservation</button>
-    </>
-  );
-
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return renderStepOne();
-      case 2:
-        return renderStepTwo();
-      case 3:
-        return renderStepThree();
-      default:
-        return null;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Your authentication logic here
+    if (username.trim() === '' || password.trim() === '') {
+      setError('Please enter username and password.');
+    } else {
+      setError('');
+      // Here you can perform further authentication actions, like making an API call
+      console.log('Login successful! Username:', username, 'Password:', password);
     }
   };
 
   return (
-    <div>
-      {renderStep()}
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <div className="login-form-group">
+          <label htmlFor="login-username">Email:</label>
+          <input
+            type="password"
+            id="login-username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="login-form-group">
+          <label htmlFor="login-password">Password:</label>
+          <input
+            type="password"
+            id="login-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="login-button">Login</button>
+        {error && <div className="login-error-message">{error}</div>}
+      </form>
     </div>
   );
 };
 
-export default ReservationForm;
+export default Login;

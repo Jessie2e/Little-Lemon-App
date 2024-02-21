@@ -1,4 +1,13 @@
 /* Overall Layout with CSS Grid */
+:root {
+  --first-color: #F4CE14;
+  --second-color: #495E57;
+  --second-color-dark: #45a049;
+  --third-color: #EDEFEE;
+}
+
+
+
 .container {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
@@ -10,47 +19,74 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 1rem;
   color: white;
 }
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .container {
-    grid-template-rows: 1fr 2fr 1fr;
-  }
+.grid-itemab {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px; 
 }
 
-
+/* Navigation List */
 .grid-item .nav-list {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
   align-items: center;
-  justify-content: center; /* Center the <ul> */
+  justify-content: center;
 }
 
 .grid-item .nav-list li {
-  margin-right: 2%; /* Use percentage-based spacing for proportional growth */
+  margin-right:4.5%;
 }
 
 .grid-item .nav-list a {
   text-decoration: none;
-  color: #495E57;
+  color: var(--second-color);
   font-weight: bold;
-  font-size: 1.2em;
-  transition: color 0.3s ease; /* Smooth transition for color change */
+  font-size: 1.1em;
+  transition: color 0.3s ease;
 }
 
 .grid-item .nav-list a:hover {
-  color: #F4CE14; /* Change the color on hover */
+  color: var(--first-color);
+  background-color: #f1f1f1;
+  min-width: 70px;
 }
 
 .grid-item .nav-list img {
-  height: 40px;
-  margin-right: 2%; /* Use percentage-based spacing for proportional growth */
-  align-self: center; /* Center the image vertically with respect to the line height of the text */
+  height: 2.8rem;
+  margin-right: 2%;
+  align-self: center;
+}
+
+.dropdown-content {
+  display: none; /* Hide dropdown content by default */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Style for dropdown links */
+.dropdown-content a {
+  color: var(--second-color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show dropdown content when hovering over dropdown button */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* Cart icon and count */
@@ -67,19 +103,14 @@
 }
 
 .cart-icon img {
-  margin-right: 100px;
+  margin-right: 2rem; /* Adjusted margin */
 }
+
 .cart-count {
-  margin-left: 10%; /* Use percentage-based spacing for proportional growth */
+  margin-left: 10%;
 }
 
-
-
-
-
-
-
-/* Hero.css */
+/* Hero Section */
 .hero {
   position: relative;
   display: flex;
@@ -87,22 +118,34 @@
   justify-content: center;
   text-align: center;
   color: white;
-  height: 400px; /* Set a fixed height for the hero section */
-  overflow: hidden; /* Hide overflowing content */
+  height: 35vh; /* Set the height to 100% of the viewport height */
+  overflow: hidden;
+  margin-bottom: -3rem;
 }
 
 .hero-content {
   position: absolute;
   z-index: 1;
+  top: 43%; /* Position the content at the center vertically */
+  transform: translateY(-50%);
+}
+
+.hero h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem; /* Add some spacing between h1 and p */
+}
+
+.hero p {
+  font-size: 1.6rem;
+  margin-bottom: 2rem; /* Add more spacing between p and button */
 }
 
 .hero-image {
-  width: 100%; /* Make the image fill the width of its container */
-  height: 100%; /* Make the image fill the height of its container */
-  object-fit: cover; /* Maintain aspect ratio while covering the container */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Optional: Gradient Overlay */
 .hero::before {
   content: '';
   position: absolute;
@@ -115,141 +158,99 @@
 }
 
 
-
 /* Menu Specials Section */
-.menu-specials-section {
-  background-color: #ffffff;
-  padding: 70px;
+.custom-carousel .slick-track {
+  justify-content: space-between;
 }
 
-/* Menu Specials Container */
+.menu-specials-section {
+  background-color: #ffffff;
+  padding: 2.5rem;
+}
+
 .menu-specials {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-left: 20px;
+  justify-content: space-around; /* Changed from space-between */
 }
 
 .menu-special {
-  background-color: #EDEFEE;
-  padding: 20px;
-  border-radius: 20px;
-  width: 30%; /* Adjust the width based on your preference */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-right: 10px;
+  background-color: var(--third-color);
+  padding: 1rem;
+  border-radius: 3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(30% - 2rem);
+  margin-bottom: 2.5rem;
 }
 
-/* Menu Special Image */
 .menu-special img {
-  width: 100%;
-  border-radius: 8px;
-  margin: 0 auto;
-  margin-bottom: 10px;
+  width: 90%;
+  border-radius: 3rem;
 }
 
-/* Menu Special Title */
 .menu-special h3 {
-  color: #333333;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  height: 60px;
-  overflow: hidden;
+  color: var(--second-color);
+  font-size: 1.2em;
+  margin-bottom: 1rem;
 }
 
-/* Menu Special Description */
 .menu-special p {
   color: #666666;
   font-size: 1em;
   line-height: 1.4;
-  margin: 20px 0;
-  margin-left: 50px;
+  margin-bottom: 0;
 }
 
-/* Carousel Menu */
-/* Adjustments for Carousel Menu */
 
-.menu-special-image {
-  height: 300px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.menu-special-content {
-  padding: 10px;
-  text-align: center;
-  max-width: 70%;
-  margin: auto;
-}
 
 
 /* Testimonials Section */
 .testimonials-section {
-  background-color: #495E57; /* Dark blue background for the entire section */
-  padding: 50px; /* Add padding for better spacing */
+  background-color: var(--second-color);
+  padding: 3rem;
+  margin-top: 1rem;
+  margin-bottom: -2.5rem;
 }
 
-/* Testimonials Title */
 .testimonials-section h2 {
-  color: #F4CE14; /* Yellow text color for the testimonials title */
-  font-size: 2em; /* Adjust the font size as needed */
-  text-align: center; /* Center the title within the section */
-  margin-bottom: 50px; /* Add space between the title and the testimonials */
-}
-
-/* Testimonials Container */
-.slick-slider {
-  width: 100%; /* Ensure the slider takes up the full width of its container */
-}
-
-.slick-slide {
-  padding: 0 30px; /* Adjust the padding between slides as needed */
-}
-/* Carousel Dots */
-.slick-dots li button {
-  color: #F4CE14; /* Change the color of the dots to yellow */
-}
-
-.slick-dots li.slick-active button {
-  color: #F4CE14; /* Change the color of the active dot to yellow */
-}
-
-/* Individual Testimonial Card */
-.testimonial {
-  background-color: #EDEFEE;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 100px; /* Set a fixed height for each testimonial box */
+  color: var(--first-color);
+  font-size: 2em;
   text-align: center;
-  margin-right: -100px;
+  margin-bottom: 1rem;
+  margin-top: -1rem;
 }
 
-/* Testimonial Text */
+.testimonial {
+  background-color: var(--third-color);
+  padding: 3rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 4rem;
+  align-content: center;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
 .testimonial p {
-  color: #495E57; /* Dark blue text color for the testimonials */
-  font-size: 1em; /* Adjust the font size as needed */
-  line-height: 1.4; /* Adjust line height for better readability */
-  margin: 10; /* Remove default margin to prevent extra spacing */
+  color: var(--second-color);
+  font-size: 1em;
+  margin-top: -.3rem;
 }
-
-/* Testimonial Author */
 .testimonial span {
-  color: #495E57; /* Dark blue text color for the author */
-  font-size: 0.9em; /* Adjust the font size as needed */
-  font-style: italic; /* Make the author's name italic */
-  display: block; /* Add a line break after the testimonial text */
-  margin-top: 10px; /* Add space between the text and the author's name */
+  color: var(--second-color);
+  font-size: 0.9em;
+  font-style: italic;
+  display: block;
 }
-
 
 /* About Restaurant Section */
 .ab-restaurant {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f4ce14;
-  padding: 50px;
+  background-color: var(--first-color);
+  padding: 1rem;
+  margin-top: 2.5rem;
 }
 
 .about-restaurant {
@@ -260,13 +261,13 @@
   width: 100%; /* Ensure full width */
   max-width: 1200px; /* Adjust the max-width as needed */
   margin: 0 auto; /* Center the container */
-  padding: 20px; /* Add padding for better spacing */
+  padding: .7rem; /* Add padding for better spacing */
 }
 
 .text-content {
-  color: #495e57;
+  color: var(--second-color);
   max-width: 50%;
-  margin-left: 50px;
+  margin-left: 2.2rem;
 }
 
 .text-content h2 {
@@ -274,7 +275,7 @@
 }
 
 .text-content p {
-  color: #495e57;
+  color: var(--second-color);
   font-size: 1.2em;
 }
 
@@ -282,7 +283,7 @@
   max-width: 40%; /* Adjust the max-width as needed */
   position: relative;
   z-index: 1;
-  margin-top: 13rem; /* Add this line to create space at the top */
+  margin-top: 160px; /* Add this line to create space at the top */
 }
 
 .double-image img {
@@ -290,7 +291,7 @@
   height: auto;
   max-width: 100%; /* Add this line */
   object-fit: cover;
-  border-radius: 26px;
+  border-radius: 2rem;
 }
 
 .about-2 {
@@ -300,49 +301,56 @@
 }
 
 /* Horizontal Footer Grid */
-.grid-item .footer-content {
+.footer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.grid-item .footer-section {
+.footer-section {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: var(--second-color)
 }
 
-.grid-item .footer-section img {
-  height: 40px;
-  margin-bottom: 10px;
-  margin-left: 40px;
+.footer-section img {
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
 }
 
-.grid-item .footer-section h2 {
+.footer-section h2 {
   font-size: 1.2em;
-  margin-bottom: 10px;
+  margin-bottom: .6rem;
   text-align: left;
 }
 
-.grid-item .footer-section ul {
+.footer-section ul {
   list-style: none;
   padding: 0;
   margin: 0;
   text-align: left;
 }
 
-.grid-item .footer-section li {
-  margin-bottom: 5px;
+.footer-section li {
+  margin-bottom: 1rem;
 }
 
-.grid-item .footer-section a {
+.footer-section ul li:hover {
+  color: var(--first-color);
+  background-color: #f1f1f1;
+}
+
+
+.footer-section a {
   text-decoration: none;
-  color: #495e57;
+  color: var(--second-color);
 }
 
-.grid-item .footer-section p {
+.footer-section p {
   margin: 0;
   font-size: 0.9em;
 }
@@ -351,44 +359,38 @@
 /* Adjustments for Carousel Menu */
 
 .menu-special-image {
-  height: 300px; /* Adjust the height as needed */
+  height: 20rem; /* Adjust the height as needed */
   width: 100%; /* Ensure the image takes the full width of its container */
   object-fit: cover; /* Ensure the image covers the container while maintaining its aspect ratio */
 }
 
 .menu-special-content {
-  padding: 10px; /* Add padding to the content for spacing */
+  padding: .6rem; /* Add padding to the content for spacing */
   text-align: center; /* Center-align text content */
   max-width: 90%; /* Limit the width of text content */
   margin: auto; /* Center the content horizontally */
 }
 
-
-
-
-
-
-
-/* Menu.css */
+/* Menu Page */
 .menu-page {
-  padding: 20px;
+  padding: 2rem;
 }
 
 .category-buttons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-bottom: 2rem;
   justify-content: space-around; /* Center and space buttons equally */
   width: 100%; /* Take up the full width of the container */
 }
 
 .category-buttons button {
   flex-grow: 1; /* Allow buttons to grow and shrink equally */
-  background-color: #F4CE14;
-  color: #495e57;
+  background-color: var(--first-color);
+  color: var(--second-color);
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 1rem;
+  border-radius: 3rem;
   cursor: pointer;
 }
 
@@ -398,15 +400,16 @@
 
 .menu-items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: 2rem;
 }
 
 .menu-card {
-  background-color: #EDEFEE;
-  padding: 20px;
+  background-color: var(--third-color);
+  padding: 1rem;
   border-radius: 8px;
 }
+
 .menu-card-content {
   display: flex;
 }
@@ -414,21 +417,20 @@
 .menu-card-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 2rem;
 }
 
-/* Adjust menu-image styles */
 .menu-image {
   width: 300px;
   max-width: 100%;
-  height: auto;
+  height:fit-content;
   border-radius: 8px;
 }
 
-/* Adjust menu-details styles */
 .menu-details {
   max-width: 50%;
-  margin-left: 20px;
+  margin-left: 1rem;
+  height: fit-content;
 }
 
 .menu-details button,
@@ -436,7 +438,7 @@
 .menu-details p,
 .cart-actions button,
 .counter button {
-  color: #495e57;
+  color: var(--second-color);
 }
 
 .cart-actions,
@@ -444,53 +446,109 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .counter span {
-  color: #495e57;
+  color: var(--second-color);
 }
 
+/* Login Page */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--second-color);
+  height: 49vh;
+}
 
+.login-form {
+  background-color: var(--third-color);
+  padding: 4rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 25rem;
+}
 
+.login-form h2 {
+  text-align: center;
+}
 
+.login-form-group {
+  margin-bottom: 2rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 93%;
+  padding: .5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--first-color);
+  color: #fff;
+  cursor: pointer;
+  text-align: center; /* Center the text */
+  color: var(--second-color);
+}
+
+.login-button:hover {
+  background-color: var(--first-color);
+}
+
+.login-error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Reservation Form */
 .reservation-container {
-  max-width: 400px;
+  max-width: 25rem;
   margin: 0 auto;
-  padding: 50px;
-  color: #495e57;
+  padding: 5rem;
+  color: var(--second-color);
   border-radius: 8px;
   text-align: center; /* Center the text */
 }
 
-/* ... Your existing CSS ... */
-
 .form-input {
   margin-bottom: 20px;
   margin-top: 10px;
-  background-color: #EDEFEE;
+  background-color: var(--third-color);
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .form-input > div {
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   text-align: center;
+  max-width: 400px;
 }
 
 .form-input label {
-  color: #495e57;
-  margin-right: 10px;
+  color: var(--second-color);
 }
 
 .form-input input,
 .form-input select {
-  color: #495e57;
+  color: var(--second-color);
   border-radius: 8px;
-  border: 1px solid #495e57;
+  border: 1px solid var(--second-color);
   text-align: center;
   width: 150px;
   padding: 10px;
@@ -498,14 +556,16 @@
 }
 
 .reserve-button {
-  background-color: #F4CE14;
-  color: black;
+  background-color: var(--first-color);
+  color: var(--second-color);
   border: none;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
   display: block;
+  width: 12rem;
   margin: 0 auto; /* Add margin:auto to center the button horizontally */
 }
 
@@ -513,13 +573,7 @@
   background-color: #E0B60A;
 }
 
-
-.menu-items {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
+/* Availability Section */
 .avail-card {
   display: flex;
   flex-direction: column;
@@ -528,9 +582,9 @@
 }
 
 .avail-buttons {
-  color: #495e57;
+  color: var(--second-color);
   border-radius: 8px;
-  border: 1px solid #495e57;
+  border: 1px solid var(--second-color);
   width: 150px;
   padding: 10px;
   margin: 10px;
@@ -538,17 +592,23 @@
   transition: background-color 0.3s ease; /* Adding transition for a smooth effect */
 }
 
+.avail-buttons.active {
+  background-color: var(--second-color-dark); /* Use a darker shade of your primary color */
+  color: white; /* Text color for better visibility */
+}
+
 .avail-buttons:hover {
   background-color: #e0e0e0; /* Change the background color on hover */
 }
 
-.avail-buttons.active {
-  background-color: #6ab04c; /* Change the background color when the button is clicked */
-  color: #fff; /* Change the text color for better visibility */
+.avail-buttons.clicked {
+  background-color: var(--second-color); /* Change to your desired color */
+  color: #fff; /* Change to your desired color */
 }
 
+
 .avail-inputs {
-  color: #495e57;
+  color: var(--second-color);
   padding: 10px;
   margin: 20px;
   display: flex;
@@ -557,61 +617,118 @@
   line-height: 50px;
 }
 
-.form-input input[type="checkbox"] {
-  margin-right: -65px;
+.cb > div {
+  margin-bottom: 4px; /* Adjust spacing between each checkbox and label */
+  display: inline-block; /* Ensure labels are displayed on the same line */
+}
+
+.cb > div label {
+  display: inline-block; /* Ensure labels are displayed on the same line */
+  text-align: left;
+  margin-left: -5rem;
+
+}
+
+.cb > div input[type="checkbox"] {
+  display: inline-block; /* Ensure checkboxes are displayed on the same line */
+  margin-right: -2rem;
 }
 .avail-h {
-  color: #495e57;
+  color: var(--second-color);
   text-align: center;
 }
 
-.reservation-container {
-  display: flex;
-  flex-direction: column;
-}
-
+/* Progress Bar */
 .progress-bar {
-  background-color: #F4CE14;
+  background-color: var(--first-color);
   height: 5px;
 }
 
 .progress {
   height: 100%;
   width: 0;
-  background-color: #495e57;
+  background-color: var(--second-color);
 }
 
-
-/* Checkout.css */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-
-.checkout-card {
-  background-color: #EDEFEE;
-  padding: 10px;
+/* Confirmation Page */
+.confirmation-container {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid #ccc;
   border-radius: 8px;
-}
-
-.checkout-container {
-  max-width: 800px;
-  margin: 50px auto;
-  background-color: #fff;
+  background-color: var(--third-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-container h2 {
+  font-size: 24px;
+  color: var(--second-color);
+  margin-bottom: 2rem;
+}
+
+.confirmation-container p {
+  font-size: 18px;
+  color: var(--second-color);
+  margin-bottom: 3rem;
+}
+.form-input {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  background-color: var(--third-color);
   padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.confirmation-details {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.confirmation-details p {
+  font-size: 16px;
+  color: var(--second-color);
+  margin-bottom: 5px;
+}
+
+.confirmation-container button {
+  background-color: var(--second-color);
+  color: #fff;
+  border: none;
+  margin-right: 40px;
+  margin-left: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirmation-container button:hover {
+  background-color: var(--second-color);
+  color: var(--first-color);
+}
+
+/* Checkout Page */
+.checkout-container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem;
+  color: var(--second-color);
   border-radius: 8px;
+  text-align: center; /* Center the text */
 }
 
 .checkout-container h2 {
-  color: #333;
+  color: var(--second-color);
 }
 
 .checkout-list {
   list-style: none;
-  background-color: #EDEFEE;
+  background-color: var(--third-color);
   padding: 10px;
   border-radius: 8px;
   margin: 0 0 10px; /* Add margin for space between each card */
@@ -620,14 +737,12 @@ body {
 .checkout-container li {
   list-style: none;
   padding: 0;
-  background-color: #EDEFEE;
+  background-color: var(--third-color);
   border-bottom: 1px solid #ddd;
-
   padding: 10px;
   border-radius: 8px;
   margin: 0 0 20px; /* Add margin for space between each card */
 }
-
 
 .checkout-item {
   display: flex;
@@ -647,23 +762,25 @@ body {
 
 .checkout-details {
   flex: 1 1;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .checkout-details button {
-  color: #495e57;
+  color: var(--second-color);
 }
 
 .checkout-container p {
-  margin: 20px;
+  margin: 10px;
 }
 
+
 .checkout-container button {
-  background-color: #4caf50;
+  background-color: var(--second-color-dark);
   color: #fff;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+  margin-top: 2rem;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -680,3 +797,41 @@ body {
 .quantity-buttons button {
   margin: 0 5px;
 }
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+}
+
+
+
+.slick-dots li {
+  /* Set the background color of the dots */
+  background-color: var(--second-color); /* Change to the color you want */
+  /* Set the color of the dots */
+  color: var(--first-color); /* Change to the color you want */
+  /* Set other styles like border, padding, etc. */
+  border-radius: 50%; /* Make the dots circular */
+  width: 10px; /* Adjust the width of the dots */
+  height: 10px; /* Adjust the height of the dots */
+}
+
+.slick-dots button:hover {
+  /* Set the background color of the dots on hover */
+  background-color: var(--first-color); /* Change to the hover color you want */
+  border-radius: 50%; /* Make the dots circular */
+
+}
+
+.slick-arrow.slick-prev{
+ background-color: var(--second-color);
+ border-radius: 100%; /* Make the dots circular */
+
+}
+.slick-arrow.slick-next{
+  background-color: var(--second-color);
+  border-radius: 100%; /* Make the dots circular */
+ 
+ }
+ 

@@ -16,10 +16,10 @@ const About = () => {
         </div>
         <div className='double-image'>
           <div className='about-1'>
-            <img src='/MarioandAdrian.jpg' alt='Two Little Lemon Employees' />
+            <img src='/MarioandAdrian.jpg' alt='Two Little Lemon Employees smiling and working behind the counter' />
           </div>
           <div className="about-2">
-            <img src='/restaurant.jpg' alt='The Little Lemon Exterior' />
+            <img src='/restaurant.jpg' alt='Exterior view of The Little Lemon restaurant' />
           </div>
         </div>
       </section>
