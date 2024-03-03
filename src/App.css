@@ -631,7 +631,7 @@
 
 .cb > div input[type="checkbox"] {
   display: inline-block; /* Ensure checkboxes are displayed on the same line */
-  margin-right: -2rem;
+  margin-right: -2.5rem;
 }
 .avail-h {
   color: var(--second-color);
@@ -761,8 +761,11 @@
 }
 
 .checkout-details {
-  flex: 1 1;
-  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  margin-right: .5rem;
 }
 
 .checkout-details button {
@@ -835,3 +838,92 @@
  
  }
  
+ .orderfood {
+  width: 30%;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--first-color);
+  color: #fff;
+  cursor: pointer;
+  text-align: center; /* Center the text */
+  color: var(--second-color);
+}
+
+.orderfood:hover button {
+  background-color: var(--second-color);
+}
+
+
+
+/* Checkout Container */
+.checkout-containerr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--second-color);
+  border-radius: 8px;
+  text-align: center; /* Center the text */
+}
+
+.checkout-containerr .tip-section {
+  border-top: .3rem solid var(--second-color); /* Adjust the color and thickness as needed */
+  width: 35rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  margin-bottom: 2rem; /* Adjust margin bottom to add space between the line and the content below */
+}
+/* Radio Buttons */
+input[type="radio"] {
+  margin-right: .6rem;
+}
+
+/* Tip Input Field */
+input[type="number"] {
+  width: 3rem;
+  padding: 5px;
+  border: 1px solid var(--second-color);
+  border-radius: 5px;
+}
+
+/* Total Price */
+.total-price {
+  font-weight: bold;
+}
+
+/* Checkboxes */
+.cbox {
+  margin-top: 1rem;
+}
+
+.cbox input[type="checkbox"] {
+  margin-right: 17px;
+}
+
+/* Input Fields */
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 30%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--second-color);
+  border-radius: 5px;
+}
+
+/* Reserve Button */
+.orderfood {
+  background-color: var(--first-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.orderfood:hover {
+  background-color: var(--second-color-dark);
+}

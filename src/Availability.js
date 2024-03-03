@@ -130,6 +130,7 @@ const Availability = ({ location }) => {
           <div>
             <label htmlFor="password">Create a password:</label>
             <input type="password" id="password" />
+            <p></p>
             <label htmlFor="confirmPassword">Confirm password:</label>
             <input type="password" id="confirmPassword" />
           </div>
@@ -138,6 +139,7 @@ const Availability = ({ location }) => {
           <div>
             <label htmlFor="memberEmail">Member Email:</label>
             <input type="email" id="memberEmail" name="memberEmail" value={formData.memberEmail} onChange={handleChange} />
+            <p></p>
             <label htmlFor="memberPassword">Member Password:</label>
             <input type="password" id="memberPassword" name="memberPassword" value={formData.memberPassword} onChange={handleChange} />
           </div>
